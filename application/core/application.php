@@ -33,7 +33,10 @@ class Application
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require APP . 'controllers/' . $this->url_controller . '.php';
-            $this->url_controller = new $this->url_controller();
+            //PHP no reconoce minusculas y mayusculas en las instancias de las clases
+            //sin embargo, utilizamos la funciòn ucfirst para mayor seguridad
+            $class = ucfirst($this->url_controller);
+            $this->url_controller = new $class();
 
             // check for method: does such a method exist in the controller ?
             if (method_exists($this->url_controller, $this->url_action)) {
@@ -73,8 +76,8 @@ class Application
         if (isset($_GET['url'])) {
 
             // split URL
-            $url = trim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
+            $url = trim($_GET['url'], '/');            
+            $url = filter_var($url, FILTER_SANITIZE_URL);            
             $url = explode('/', $url);
 
             // Put URL parts into according properties

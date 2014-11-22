@@ -15,10 +15,14 @@ class Controller
     /**
      * Whenever a controller is created, open a database connection too and load "the model".
      */
-    function __construct()
+    //El nulo lo toma como un false
+    //false == true entonces no carga el modelo
+    function __construct($modelName = null)
     {
         $this->openDatabaseConnection();
-        $this->loadModel();
+        if ($modelName) {
+            $this->loadModel($modelName);
+        }
     }
 
     /**
@@ -41,10 +45,14 @@ class Controller
      * Loads the "model".
      * @return object model
      */
-    public function loadModel()
+    public function loadModel($modelName)
     {
-        require APP . '/model/model.php';
+        require APP . '/model/'.$modelName.'.php';
         // create new "model" (and pass the database connection)
         $this->model = new Model($this->db);
     }
+
+
+
+
 }

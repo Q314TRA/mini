@@ -11,12 +11,19 @@
  */
 class Songs extends Controller
 {
+    
+    function __construct(){
+        parent::__construct("model");
+    }
     /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/songs/index
      */
+
+
     public function index()
     {
+        
         // getting all songs and amount of songs
         $songs = $this->model->getAllSongs();
         $amount_of_songs = $this->model->getAmountOfSongs();
@@ -73,8 +80,12 @@ class Songs extends Controller
      * This method handles what happens when you move to http://yourproject/songs/editsong
      * @param int $song_id Id of the to-edit song
      */
-    public function editSong($song_id)
+    public function editSong($song_id, $hola)
     {
+        echo "<pre>";
+        echo($song_id);
+        echo($hola);
+        exit();
         // if we have an id of a song that should be edited
         if (isset($song_id)) {
             // do getSong() in model/model.php
