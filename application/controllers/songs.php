@@ -28,10 +28,7 @@ class Songs extends Controller
         $songs = $this->model->getAllSongs();
         $amount_of_songs = $this->model->getAmountOfSongs();
 
-       // load views. within the views we can echo out $songs and $amount_of_songs easily
-        require APP . 'views/_templates/header.php';
-        require APP . 'views/songs/index.php';
-        require APP . 'views/_templates/footer.php';
+        $this->render("index",array('songs' => $songs, 'amount_of_songs'=>$amount_of_songs));
     }
 
     /**
