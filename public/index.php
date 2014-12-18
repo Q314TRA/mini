@@ -9,7 +9,7 @@
  * @link https://github.com/panique/mini/
  * @license http://opensource.org/licenses/MIT MIT License
  */
-
+        session_start();
 // TODO get rid of this and work with namespaces + composer's autoloader
 
 // set a constant that holds the project's folder path, like "/var/www/".

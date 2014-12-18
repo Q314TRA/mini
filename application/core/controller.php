@@ -25,7 +25,7 @@ class Controller
     //false == true entonces no carga el modelo
     function __construct($modelName = null)
     {
-        session_start();
+
         $this->openDatabaseConnection();
          if ($modelName) {
             $this->loadModel($modelName);
@@ -47,7 +47,7 @@ class Controller
 
             // generate a database connection, using the PDO connector
             // @see http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
-            self::$db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS, $options);
+            self::$db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, $options);
         }
     }
 
@@ -108,6 +108,14 @@ class Controller
             return false;
         }
         
+    }
+
+    public function isAjax()
+    {
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+        {return true;}
+        else
+        {return false;}
     }
 
 
